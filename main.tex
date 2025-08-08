@@ -1,11 +1,12 @@
-\documentclass{article}
+% Set document to 10pt Times New Roman on letter paper
+\documentclass[10pt]{article}
 %====================================================
 % PACKAGES AND SETUP
 %====================================================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-\usepackage{lmodern}
+\usepackage{mathptmx} % Use Times New Roman font
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{amsthm}
 \usepackage{graphicx}
@@ -26,31 +27,47 @@
 \usetikzlibrary{patterns,arrows,shapes,positioning,calc}
 \usepackage{siunitx}
 
-\geometry{
-  left=2.5cm,
-  right=2.5cm,
-  top=3cm,
-  bottom=3cm
+% Use 1-inch margins on all sides per JSR guidelines
+\geometry{%
+  left=1in,%
+  right=1in,%
+  top=1in,%
+  bottom=1in%
 }
 
+% Set paragraph spacing and remove indent
 \setlength{\parskip}{6pt}
 \setlength{\parindent}{0pt}
-\onehalfspacing
-\title{\textbf{Mathematics AI HL -- IA:}\\[6pt]
-\large{\textit{The Correlation Between SELIC Interest Rate and Real-Estate Sales in Campinas}\\
+% Single spacing per JSR guidelines
+\singlespacing
 
-\textit{Page count: 23}}}
-\subtitle
-\begin{document}
-
+% Title of the paper (bolded).  Use 18pt bold font per JSR guidelines.
+\title{\fontsize{18}{22}\selectfont\textbf{The Correlation Between SELIC Interest Rate and Real‑Estate Sales in Campinas}}
+% Author name and affiliation with contact email
+\author{Nicolas Cipulo Feres\\Coree International School, Joinville, SC, Brazil\\\texttt{nicolas.cipuloferess@gmail.com}}
 \date{}
+\begin{document}
 \maketitle
-%====================================================
-\clearpage
+
+% ---------------------------------------------------
+% Abstract (Summary) per JSR guidelines
+% The abstract should be a single paragraph under 250 words.
+\begin{abstract}
+The SELIC rate is Brazil’s central bank base interest rate and exerts a fundamental influence on borrowing costs and housing demand.  This study investigates how fluctuations in the SELIC rate correlate with monthly real‑estate sales in Campinas, São Paulo, over the 24‑month period from January 2012 through December 2013.  Using official data from the Banco Central do Brasil and municipal property records, we construct a 24‑point dataset of SELIC rates and corresponding sales.  Preliminary box‑plot analysis suggests a clear inverse relationship: higher interest rates are associated with reduced and less variable sales volumes.  To model this relationship, we employ both linear/quadratic polynomial regressions and an ARIMAX(1,1,1) time‑series model with the SELIC rate as an exogenous variable.  The linear regression yields a slope of approximately \(-145.7\), indicating that a 1 percentage‑point increase in SELIC corresponds to roughly 146 fewer units sold, and an \(R^2\) of about 0.62.  The ARIMAX model captures autocorrelation in the sales series and the effect of the exogenous SELIC rate; estimated coefficients show that a 1 percentage‑point increase in the SELIC reduces monthly sales changes by about 144 units.  Overall, the models confirm a strong negative correlation between interest rates and real‑estate activity, highlighting the sensitivity of local housing markets to macroeconomic policy.
+\end{abstract}
+
+% Define heading styles to match JSR guidelines
+\usepackage{titlesec}
+\titleformat{\section}{\bfseries\fontsize{14}{16}\selectfont}{\thesection.\ }{0.5em}{}
+\titleformat{\subsection}{\bfseries\fontsize{12}{14}\selectfont}{\thesubsection.\ }{0.5em}{}
+\titleformat{\subsubsection}{\itshape\fontsize{12}{14}\selectfont}{\thesubsubsection.\ }{0.5em}{}
+\titleformat{\paragraph}{\underline{\fontsize{10}{12}\selectfont}}{\theparagraph.\ }{0.5em}{}
+
+% ---------------------------------------------------
 
 
 %====================================================
-\section{Introduction and Motivation}
+\section{Introduction}
 \label{sec:intro}
 %====================================================
 
@@ -79,7 +96,7 @@ Other methodological approaches could include manual algebraic modeling of the d
 \]
 
 %====================================================
-\section{Primary Analysis}
+\section{Methods and Preliminary Analysis}
 \label{sec:rawdata}
 %====================================================
 
@@ -124,7 +141,7 @@ Below is the box-and-whiskers plot of SELIC rates, which illustrates the distrib
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=130mm]{IMG_1063.png}
+    \includegraphics[width=130mm]{Fig1.png}
     \caption{Box-and-whiskers plot of SELIC rates for the period 2012--2013, illustrating the distribution and quartile ranges of interest rates.}
     \label{fig:selic_boxplot}
 \end{figure}
@@ -133,7 +150,7 @@ Immediately following, the next figure presents the box-and-whiskers plot of mon
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=120mm]{IMG_1062.png}
+    \includegraphics[width=120mm]{Fig2.png}
     \caption{Box-and-whiskers plot of monthly real-estate sales in Campinas (2012--2013), highlighting the variation and interquartile range of sales.}
     \label{fig:sales_boxplot}
 \end{figure}
@@ -142,7 +159,7 @@ Immediately following, the next figure presents the box-and-whiskers plot of mon
 Although these box plots provide only a coarse grouping of SELIC values into quartiles, it is observed that in three of the higher SELIC ranges the interquartile range for sales is narrower than in the lower SELIC range. This suggests that as the SELIC rate increases, real estate sales tend to decrease—likely due to constrained demand—which motivates the development of more detailed numerical models.
 
 %====================================================
-\section{Polynomial Regressions (Linear and Quadratic)}
+\section{Polynomial Regression Analysis}
 \label{sec:poly}
 %====================================================
 
@@ -220,7 +237,7 @@ so that
 \end{table}
 
 %====================================================
-\section{ the ARIMAX(1,1,1) Model:}
+\section{ARIMAX(1,1,1) Model}
 \label{sec:arimax}
 %====================================================
 
@@ -1334,6 +1351,17 @@ $t$ & $y_t$ & $\hat{y}_t$ & MA$_t^{\mathrm{real}}$ & MA$_t^{\mathrm{corr}}$ & Re
 
 \end{enumerate}
 
+%====================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%====================================================
 
+This paper examined the relationship between Brazil’s SELIC base interest rate and monthly real‑estate sales in Campinas.  Simple linear and quadratic regressions provided an initial picture of the negative correlation: increases in the SELIC rate consistently coincided with declines in the number of units sold, with the linear model estimating that a 1 percentage‑point rise in SELIC reduces sales by approximately 145 units.  A more sophisticated ARIMAX(1,1,1) model, which incorporates autocorrelation and treats the SELIC rate as an exogenous driver, yielded similar findings.  The estimated coefficient $\beta\approx -144$ implies that higher interest rates substantially dampen sales, while the autoregressive and moving‑average terms capture short‑term momentum and noise.  Graphical comparisons between the ARIMAX forecasts and actual sales demonstrated close alignment, with forecast errors typically within ±100 units.  Overall, the evidence supports the hypothesis that higher borrowing costs, as reflected by the SELIC rate, suppress housing demand in Campinas.  Future work could extend the dataset to longer time horizons or incorporate additional macroeconomic variables to refine these insights.
+
+%====================================================
+\section*{Acknowledgements}
+%====================================================
+
+The author thanks Leonardo Broering for his guidance and instruction throughout the development of this project.  His mentorship was invaluable in refining the research question, analysing the data, and interpreting the results.
 
 \end{document}
